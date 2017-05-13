@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GeoDistance</title>
+</head>
+<body>
+
+  City
+  	<input type="text" id="inputAddress" style="width:200px" title="Address to Geocode" /> 
+  	<input type="button" onclick="codeAddress()" id="inputButtonGeocode" style="width:100px" title="Click to Geocode" value="Submit" /><br><br>
+  Latitude:<p id="lat"></p>
+  Longitude:<p id="lng"></p>
+
+<!--Calling google map api -->  
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyA3s_vBgrlKejd-f1UvnUS8Ddn5qIY2NKA"></script>
+
+<!--Display coordinates of city --> 
+<script type="text/javascript">
+  	function codeAddress(){
+	var address = document.getElementById('inputAddress').value;
+	var geocoder = new google.maps.Geocoder();
+
+	geocoder.geocode( {'address':address},function(results,status){
+		if(status == google.maps.GeocoderStatus.OK){
+			var latitude = results[0].geometry.location.lat();
+			var longitude = results[0].geometry.location.lng();
+			document.getElementById('lat').innerHTML = latitude;
+			document.getElementById('lng').innerHTML = longitude;
+		}
+	});
+}
+</script>
+</body>
+</html>
